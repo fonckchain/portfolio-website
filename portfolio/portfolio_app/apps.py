@@ -2,4 +2,4 @@ from django.apps import AppConfig
 
 class PortfolioAppConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'portfolio.portfolio_app'
+    name = 'portfolio_app'
