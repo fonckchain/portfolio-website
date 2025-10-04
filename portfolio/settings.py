@@ -125,7 +125,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [BASE_DIR / "portfolio_app/static"]
+STATICFILES_DIRS = [BASE_DIR / "portfolio/portfolio_app/static"]
 
 # Allowed hosts (update for deployment later)
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
