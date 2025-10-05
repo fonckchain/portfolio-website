@@ -1,4 +1,49 @@
 from django.db import models
+from django.core.validators import URLValidator
+
+class SocialLink(models.Model):
+    """Social media and professional links"""
+    PLATFORM_CHOICES = [
+        ('github', 'GitHub'),
+        ('linkedin', 'LinkedIn'),
+        ('twitter', 'Twitter/X'),
+        ('email', 'Email'),
+        ('website', 'Website'),
+        ('other', 'Other'),
+    ]
+
+    platform = models.CharField(max_length=20, choices=PLATFORM_CHOICES)
+    url = models.URLField(max_length=200)
+    display_name = models.CharField(max_length=100, blank=True)
+    icon_class = models.CharField(
+        max_length=50,
+        blank=True,
+        help_text="Bootstrap icon class (e.g., 'bi-github')"
+    )
+    order = models.IntegerField(default=0, help_text="Display order")
+    is_active = models.BooleanField(default=True)
+
+    class Meta:
+        ordering = ['order', 'platform']
+
+    def __str__(self):
+        return f"{self.get_platform_display()} - {self.url}"
+
+class ContactMessage(models.Model):
+    """Contact form submissions"""
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    subject = models.CharField(max_length=200)
+    message = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    is_read = models.BooleanField(default=False)
+    replied = models.BooleanField(default=False)
+
+    class Meta:
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return f"{self.name} - {self.subject} ({self.created_at.strftime('%Y-%m-%d')})"
 
 class Technology(models.Model):
     """Technologies I use or am interested in learning"""

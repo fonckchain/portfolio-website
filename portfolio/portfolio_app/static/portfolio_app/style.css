@@ -130,9 +130,35 @@ body {
     color: var(--primary-color) !important;
 }
 
+/* Contact Section */
+.social-link-btn {
+    transition: all 0.3s ease;
+}
+
+.social-link-btn:hover {
+    transform: translateX(10px);
+    background-color: #0d6efd;
+    color: white !important;
+    border-color: #0d6efd;
+}
+
+.contact-info ul li {
+    padding: 5px 0;
+}
+
 /* Footer */
 footer {
-    margin-top: 80px;
+    margin-top: 0;
+}
+
+.social-footer a {
+    transition: transform 0.3s ease;
+    display: inline-block;
+}
+
+.social-footer a:hover {
+    transform: translateY(-3px);
+    opacity: 0.8;
 }
 
 /* Responsive */

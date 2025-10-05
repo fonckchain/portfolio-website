@@ -22,6 +22,7 @@
                     <li class="nav-item"><a class="nav-link" href="#technologies">Technologies</a></li>
                     <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
                     <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
                 </ul>
             </div>
         </div>
@@ -186,10 +187,103 @@
         </div>
     </section>
 
+    <!-- Contact Section -->
+    <section id="contact" class="section-padding bg-light">
+        <div class="container">
+            <h2 class="section-title text-center mb-5">Get In Touch</h2>
+
+            <div class="row">
+                <!-- Contact Form -->
+                <div class="col-lg-6 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h4 class="mb-4">Send Me a Message</h4>
+
+                            {% if messages %}
+                                {% for message in messages %}
+                                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                                    {{ message }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                                </div>
+                                {% endfor %}
+                            {% endif %}
+
+                            <form method="post" action="{% url 'portfolio_app:home' %}#contact">
+                                {% csrf_token %}
+                                <div class="mb-3">
+                                    {{ contact_form.name }}
+                                </div>
+                                <div class="mb-3">
+                                    {{ contact_form.email }}
+                                </div>
+                                <div class="mb-3">
+                                    {{ contact_form.subject }}
+                                </div>
+                                <div class="mb-3">
+                                    {{ contact_form.message }}
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-lg w-100">
+                                    <i class="bi bi-send"></i> Send Message
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Social Links & Info -->
+                <div class="col-lg-6">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h4 class="mb-4">Connect With Me</h4>
+
+                            {% if social_links %}
+                            <div class="social-links mb-4">
+                                {% for link in social_links %}
+                                <a href="{{ link.url }}" target="_blank" class="social-link-btn btn btn-outline-dark btn-lg mb-3 w-100 text-start">
+                                    {% if link.icon_class %}
+                                    <i class="bi {{ link.icon_class }} me-2"></i>
+                                    {% else %}
+                                    <i class="bi bi-link-45deg me-2"></i>
+                                    {% endif %}
+                                    {{ link.display_name|default:link.get_platform_display }}
+                                </a>
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+
+                            <div class="contact-info mt-4">
+                                <h5 class="mb-3">Why Reach Out?</h5>
+                                <ul class="list-unstyled">
+                                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> Project collaboration</li>
+                                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> Job opportunities</li>
+                                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> Technical discussions</li>
+                                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> General inquiries</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer class="bg-dark text-white text-center py-4">
         <div class="container">
             <p class="mb-0">&copy; 2025 Developer Portfolio | Built with Django & PostgreSQL</p>
+            {% if social_links %}
+            <div class="social-footer mt-3">
+                {% for link in social_links %}
+                <a href="{{ link.url }}" target="_blank" class="text-white mx-2">
+                    {% if link.icon_class %}
+                    <i class="bi {{ link.icon_class }} fs-4"></i>
+                    {% else %}
+                    <i class="bi bi-link-45deg fs-4"></i>
+                    {% endif %}
+                </a>
+                {% endfor %}
+            </div>
+            {% endif %}
         </div>
     </footer>
 
