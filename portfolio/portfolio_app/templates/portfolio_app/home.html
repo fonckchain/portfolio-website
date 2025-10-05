@@ -2,37 +2,188 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>My Portfolio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Developer Portfolio</title>
     {% load static %}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="{% static 'portfolio_app/style.css' %}">
 </head>
 <body>
-    <div class="container">
-        <h1>My Developer Portfolio</h1>
-        <h2>Skills</h2>
-        {% for skill in skills %}
-            <div class="skill card">
-                <div class="card-body">
-                    <h3>{{ skill.name }}</h3>
-                    <p>Proficiency: {{ skill.proficiency }}%</p>
-                    <p>{{ skill.description }}</p>
-                </div>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#home">Portfolio</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#technologies">Technologies</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+                </ul>
             </div>
-        {% endfor %}
-        <h2>Projects</h2>
-        {% for project in projects %}
-            <div class="project card">
-                <div class="card-body">
-                    <h3>{{ project.title }}</h3>
-                    <p>{{ project.description }}</p>
-                    <p>Technologies: {% for tech in project.technologies.all %}{{ tech.name }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
-                    {% if project.link %}
-                        <a href="{{ project.link }}" class="btn btn-primary">View Project</a>
-                    {% endif %}
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="container text-center">
+            <h1 class="display-3 fw-bold mb-4">Developer Portfolio</h1>
+            <p class="lead mb-5">Building modern web applications with Python, Django, and PostgreSQL</p>
+            <a href="#projects" class="btn btn-primary btn-lg">View My Work</a>
+        </div>
+    </section>
+
+    <!-- Technologies Section -->
+    <section id="technologies" class="section-padding">
+        <div class="container">
+            <h2 class="section-title text-center mb-5">Technologies I Use</h2>
+
+            {% if technologies_using %}
+            <div class="row g-4">
+                {% for tech in technologies_using %}
+                <div class="col-md-6 col-lg-4">
+                    <div class="tech-card card h-100">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-start mb-3">
+                                <h5 class="card-title">{{ tech.name }}</h5>
+                                <span class="badge bg-primary">{{ tech.get_category_display }}</span>
+                            </div>
+                            <div class="progress mb-3" style="height: 8px;">
+                                <div class="progress-bar" role="progressbar" style="width: {{ tech.proficiency_level }}%"></div>
+                            </div>
+                            {% if tech.description %}
+                            <p class="card-text text-muted small">{{ tech.description }}</p>
+                            {% endif %}
+                        </div>
+                    </div>
                 </div>
+                {% endfor %}
             </div>
-        {% endfor %}
-    </div>
+            {% else %}
+            <p class="text-center text-muted">No technologies added yet. Add them via the admin panel!</p>
+            {% endif %}
+
+            {% if technologies_interested %}
+            <h3 class="mt-5 mb-4">Technologies I'm Interested In Learning</h3>
+            <div class="row g-3">
+                {% for tech in technologies_interested %}
+                <div class="col-md-6 col-lg-3">
+                    <div class="card interested-tech">
+                        <div class="card-body text-center">
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <h6 class="mt-2">{{ tech.name }}</h6>
+                            <small class="text-muted">{{ tech.get_category_display }}</small>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section-padding bg-light">
+        <div class="container">
+            <h2 class="section-title text-center mb-5">Core Skills</h2>
+
+            {% if skills %}
+            <div class="row g-4">
+                {% for skill in skills %}
+                <div class="col-md-6 col-lg-4">
+                    <div class="skill-card card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ skill.name }}</h5>
+                            {% if skill.category %}
+                            <p class="text-muted small mb-2">{{ skill.category }}</p>
+                            {% endif %}
+                            <div class="d-flex align-items-center mb-2">
+                                <div class="progress flex-grow-1" style="height: 10px;">
+                                    <div class="progress-bar bg-success" role="progressbar" style="width: {{ skill.proficiency }}%"></div>
+                                </div>
+                                <span class="ms-2 small fw-bold">{{ skill.proficiency }}%</span>
+                            </div>
+                            {% if skill.description %}
+                            <p class="card-text small">{{ skill.description }}</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <p class="text-center text-muted">No skills added yet. Add them via the admin panel!</p>
+            {% endif %}
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section-padding">
+        <div class="container">
+            <h2 class="section-title text-center mb-5">Featured Projects</h2>
+
+            {% if projects %}
+            <div class="row g-4">
+                {% for project in projects %}
+                <div class="col-lg-6">
+                    <div class="project-card card h-100 {% if project.is_featured %}border-primary{% endif %}">
+                        {% if project.image_url %}
+                        <img src="{{ project.image_url }}" class="card-img-top" alt="{{ project.title }}">
+                        {% endif %}
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-start mb-3">
+                                <h4 class="card-title">{{ project.title }}</h4>
+                                {% if project.is_featured %}
+                                <span class="badge bg-primary">Featured</span>
+                                {% endif %}
+                            </div>
+                            <p class="card-text">{{ project.description }}</p>
+
+                            <div class="mb-3">
+                                <strong class="d-block mb-2">Technologies:</strong>
+                                <div class="d-flex flex-wrap gap-2">
+                                    {% for tech in project.technologies.all %}
+                                    <span class="badge bg-secondary">{{ tech.name }}</span>
+                                    {% endfor %}
+                                </div>
+                            </div>
+
+                            <div class="d-flex gap-2">
+                                {% if project.link %}
+                                <a href="{{ project.link }}" class="btn btn-primary" target="_blank">
+                                    <i class="bi bi-box-arrow-up-right"></i> Live Demo
+                                </a>
+                                {% endif %}
+                                {% if project.github_url %}
+                                <a href="{{ project.github_url }}" class="btn btn-outline-dark" target="_blank">
+                                    <i class="bi bi-github"></i> GitHub
+                                </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="card-footer text-muted small">
+                            Created: {{ project.created_at|date:"F Y" }}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <p class="text-center text-muted">No projects added yet. Add them via the admin panel!</p>
+            {% endif %}
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-4">
+        <div class="container">
+            <p class="mb-0">&copy; 2025 Developer Portfolio | Built with Django & PostgreSQL</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
