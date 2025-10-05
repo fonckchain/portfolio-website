@@ -33,8 +33,14 @@ DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
 # Allowed hosts - add your Heroku app domain
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+
+# Add Heroku domain
 if os.getenv('HEROKU_APP_NAME'):
     ALLOWED_HOSTS.append(f"{os.getenv('HEROKU_APP_NAME')}.herokuapp.com")
+
+# Allow all herokuapp.com domains (simpler for Heroku)
+if 'DYNO' in os.environ:  # DYNO is auto-set by Heroku
+    ALLOWED_HOSTS.append('.herokuapp.com')
 
 
 # Application definition
