@@ -32,7 +32,7 @@ SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-change-this-in-production'
 DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
 # Allowed hosts - add your Heroku app domain
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'portfolio.fast-blocks.xyz']
 
 # Add Heroku domain
 if os.getenv('HEROKU_APP_NAME'):

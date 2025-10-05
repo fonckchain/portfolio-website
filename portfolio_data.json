@@ -1,0 +1,106 @@
+[
+{
+  "model": "portfolio_app.technology",
+  "pk": 1,
+  "fields": {
+    "name": "Git",
+    "category": "tool",
+    "description": "Version control",
+    "icon_url": "https://images.seeklogo.com/logo-png/27/1/git-logo-png_seeklogo-273180.png",
+    "proficiency_level": 70,
+    "is_interested": false
+  }
+},
+{
+  "model": "portfolio_app.technology",
+  "pk": 2,
+  "fields": {
+    "name": "Python",
+    "category": "language",
+    "description": "",
+    "icon_url": "https://cdn.simpleicons.org/python",
+    "proficiency_level": 80,
+    "is_interested": false
+  }
+},
+{
+  "model": "portfolio_app.technology",
+  "pk": 3,
+  "fields": {
+    "name": "PostgreSQL",
+    "category": "database",
+    "description": "",
+    "icon_url": "https://cdn.simpleicons.org/postgresql",
+    "proficiency_level": 80,
+    "is_interested": false
+  }
+},
+{
+  "model": "portfolio_app.technology",
+  "pk": 4,
+  "fields": {
+    "name": "Flutter",
+    "category": "framework",
+    "description": "",
+    "icon_url": "",
+    "proficiency_level": 25,
+    "is_interested": true
+  }
+},
+{
+  "model": "portfolio_app.technology",
+  "pk": 5,
+  "fields": {
+    "name": "Kali Linux",
+    "category": "other",
+    "description": "",
+    "icon_url": "https://cdn.simpleicons.org/kalilinux",
+    "proficiency_level": 50,
+    "is_interested": false
+  }
+},
+{
+  "model": "portfolio_app.technology",
+  "pk": 6,
+  "fields": {
+    "name": "Ubuntu",
+    "category": "other",
+    "description": "",
+    "icon_url": "https://cdn.simpleicons.org/ubuntu",
+    "proficiency_level": 95,
+    "is_interested": false
+  }
+},
+{
+  "model": "portfolio_app.technology",
+  "pk": 7,
+  "fields": {
+    "name": "Django",
+    "category": "framework",
+    "description": "Python-based web framework that runs on a web server. It follows the model–template–views architectural pattern.",
+    "icon_url": "https://cdn.simpleicons.org/django",
+    "proficiency_level": 70,
+    "is_interested": false
+  }
+},
+{
+  "model": "portfolio_app.skill",
+  "pk": 1,
+  "fields": {
+    "name": "Lean process improvement",
+    "proficiency": 90,
+    "description": "Methodology focused on enhancing efficiency by eliminating waste and maximizing value for customers.",
+    "category": "Kaizen"
+  }
+},
+{
+  "model": "portfolio_app.skill",
+  "pk": 2,
+  "fields": {
+    "name": "System administration",
+    "proficiency": 85,
+    "description": "",
+    "category": "DevOps"
+  }
+}
+]
