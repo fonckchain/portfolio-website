@@ -61,6 +61,18 @@ body {
     box-shadow: 0 8px 20px rgba(0,0,0,0.15);
 }
 
+.tech-icon {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+}
+
+.tech-icon-small {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+}
+
 .interested-tech {
     border: 2px dashed #ffc107;
     background-color: #fffbf0;

@@ -48,7 +48,12 @@
                     <div class="tech-card card h-100">
                         <div class="card-body">
                             <div class="d-flex justify-content-between align-items-start mb-3">
-                                <h5 class="card-title">{{ tech.name }}</h5>
+                                <div class="d-flex align-items-center gap-2">
+                                    {% if tech.icon_url %}
+                                    <img src="{{ tech.icon_url }}" alt="{{ tech.name }} icon" class="tech-icon">
+                                    {% endif %}
+                                    <h5 class="card-title mb-0">{{ tech.name }}</h5>
+                                </div>
                                 <span class="badge bg-primary">{{ tech.get_category_display }}</span>
                             </div>
                             <div class="progress mb-3" style="height: 8px;">
@@ -73,7 +78,11 @@
                 <div class="col-md-6 col-lg-3">
                     <div class="card interested-tech">
                         <div class="card-body text-center">
+                            {% if tech.icon_url %}
+                            <img src="{{ tech.icon_url }}" alt="{{ tech.name }} icon" class="tech-icon-small mb-2">
+                            {% else %}
                             <i class="bi bi-star-fill text-warning"></i>
+                            {% endif %}
                             <h6 class="mt-2">{{ tech.name }}</h6>
                             <small class="text-muted">{{ tech.get_category_display }}</small>
                         </div>
